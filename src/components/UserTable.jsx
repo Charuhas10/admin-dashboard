@@ -55,6 +55,14 @@ function UserTable({ users, setUsers, search }) {
     );
   };
 
+  const handleDeleteMultiple = () => {
+    setUsers(users.filter((user) => !checkedItems[user.id]));
+    setCheckedItems({});
+  };
+  const isAnyCheckBoxChecked = () => {
+    return Object.values(checkedItems).some((checked) => checked);
+  };
+
   return (
     <div>
       <table>
@@ -100,6 +108,9 @@ function UserTable({ users, setUsers, search }) {
           ))}
         </tbody>
       </table>
+      {isAnyCheckBoxChecked() && (
+        <button onClick={handleDeleteMultiple}>Delete Selected</button>
+      )}
       <Pagination
         totalPage={totalPage}
         currentPage={currentPage}
