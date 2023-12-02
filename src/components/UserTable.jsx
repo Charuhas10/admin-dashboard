@@ -1,17 +1,22 @@
 import { useState } from "react";
 import Pagination from "./Pagination";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
-function UserTable({ users }) {
+function UserTable({ users, setUsers, search }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
+  const [checkedItems, setCheckedItems] = useState({}); //for checkbox functionality
 
-  const [checkedItems, setCheckedItems] = useState({});
-
+  const filteredUsers = users.filter((user) =>
+    Object.values(user).some((value) =>
+      value.toString().toLowerCase().includes(search.toLowerCase())
+    )
+  );
   //calculating the indexes
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
-  const currentItems = users.slice(firstItemIndex, lastItemIndex);
   const totalPage = Math.ceil(users.length / itemsPerPage);
+  const currentItems = filteredUsers.slice(firstItemIndex, lastItemIndex);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -28,6 +33,26 @@ function UserTable({ users }) {
       newCheckedItems[item.id] = !allChecked;
     });
     setCheckedItems(newCheckedItems);
+  };
+
+  const handleDelete = (id) => {
+    setUsers(users.filter((user) => user.id !== id));
+  };
+
+  const handleEdit = (id) => {
+    const user = users.find((u) => u.id === id);
+    if (!user) return;
+    const newName = prompt("Enter new name", user.name);
+    const newEmail = prompt("Enter new Email", user.email);
+    const newRole = prompt("Enter new Role", user.role);
+
+    setUsers(
+      users.map((u) =>
+        u.id === id
+          ? { ...u, name: newName, email: newEmail, role: newRole }
+          : u
+      )
+    );
   };
 
   return (
@@ -63,7 +88,14 @@ function UserTable({ users }) {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
-              <td>buttons</td>
+              <td>
+                <button onClick={() => handleEdit(user.id)}>
+                  <FaEdit />
+                </button>
+                <button onClick={() => handleDelete(user.id)}>
+                  <FaTrash />
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

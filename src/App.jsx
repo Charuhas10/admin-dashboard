@@ -1,9 +1,11 @@
 import { useState } from "react";
 import UserTable from "./components/UserTable";
 import { useEffect } from "react";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState(""); //for search functionality
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -22,7 +24,8 @@ function App() {
 
   return (
     <div>
-      <UserTable users={users} />
+      <SearchBar search={search} setSearch={setSearch} />
+      <UserTable users={users} setUsers={setUsers} search={search} />
     </div>
   );
 }
