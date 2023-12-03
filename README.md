@@ -14,3 +14,5 @@ This is a simple admin dashboard built with **ReactJS** for internship assignmen
 - A **_bulk delete button_** is also available at the top right corner that can be used to delete all the rows at once or delete the rows that have been filtered out by the search bar.
 - Edit and Delete action buttons are also present and can be used to edit or delete a particular row.
 - Edit button will allow you to edit the data in the **_row itself_** and will render a Save or Discard action button.
+
+![image](https://github.com/Charuhas10/admin-dashboard/assets/72398218/8480d6da-a5ac-409b-b4c1-f327014119ee)
