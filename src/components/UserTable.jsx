@@ -1,17 +1,24 @@
 import { useState } from "react";
 import Pagination from "./Pagination";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa";
 
 function UserTable({ users, setUsers, search }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [checkedItems, setCheckedItems] = useState({}); //for checkbox functionality
+  const [editingId, setEditingId] = useState(null); //for edit functionality
+  const [editFormData, setEditFormData] = useState({
+    name: "",
+    email: "",
+    role: "",
+  }); //for edit functionality
 
   const filteredUsers = users.filter((user) =>
     Object.values(user).some((value) =>
       value.toString().toLowerCase().includes(search.toLowerCase())
     )
   );
+
   //calculating the indexes
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
@@ -35,30 +42,40 @@ function UserTable({ users, setUsers, search }) {
     setCheckedItems(newCheckedItems);
   };
 
-  const handleDelete = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
+  const handleEdit = (user) => {
+    setEditingId(user.id);
+    setEditFormData({ name: user.name, email: user.email, role: user.role });
   };
 
-  const handleEdit = (id) => {
-    const user = users.find((u) => u.id === id);
-    if (!user) return;
-    const newName = prompt("Enter new name", user.name);
-    const newEmail = prompt("Enter new Email", user.email);
-    const newRole = prompt("Enter new Role", user.role);
-
+  const handleSave = (id) => {
     setUsers(
-      users.map((u) =>
-        u.id === id
-          ? { ...u, name: newName, email: newEmail, role: newRole }
-          : u
+      users.map((user) =>
+        user.id === id ? { ...user, ...editFormData } : user
       )
     );
+    setEditingId(null);
+  };
+
+  const handleCancel = () => {
+    setEditingId(null);
+  };
+
+  const handleFormChange = (event) => {
+    setEditFormData({
+      ...editFormData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleDelete = (id) => {
+    setUsers(users.filter((user) => user.id !== id));
   };
 
   const handleDeleteMultiple = () => {
     setUsers(users.filter((user) => !checkedItems[user.id]));
     setCheckedItems({});
   };
+
   const isAnyCheckBoxChecked = () => {
     return Object.values(checkedItems).some((checked) => checked);
   };
@@ -93,16 +110,62 @@ function UserTable({ users, setUsers, search }) {
                 />
               </td>
               <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
               <td>
-                <button onClick={() => handleEdit(user.id)}>
-                  <FaEdit />
-                </button>
-                <button onClick={() => handleDelete(user.id)}>
-                  <FaTrash />
-                </button>
+                {editingId === user.id ? (
+                  <input
+                    type="text"
+                    name="name"
+                    value={editFormData.name}
+                    onChange={handleFormChange}
+                  />
+                ) : (
+                  user.name
+                )}
+              </td>
+              <td>
+                {editingId === user.id ? (
+                  <input
+                    type="text"
+                    name="email"
+                    value={editFormData.email}
+                    onChange={handleFormChange}
+                  />
+                ) : (
+                  user.email
+                )}
+              </td>
+              <td>
+                {editingId === user.id ? (
+                  <input
+                    type="text"
+                    name="role"
+                    value={editFormData.role}
+                    onChange={handleFormChange}
+                  />
+                ) : (
+                  user.role
+                )}
+              </td>
+              <td>
+                {editingId === user.id ? (
+                  <>
+                    <button onClick={() => handleSave(user.id)}>
+                      <FaSave />
+                    </button>
+                    <button onClick={handleCancel}>
+                      <FaTimes />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={() => handleEdit(user)}>
+                      <FaEdit />
+                    </button>
+                    <button onClick={() => handleDelete(user.id)}>
+                      <FaTrash />
+                    </button>
+                  </>
+                )}
               </td>
             </tr>
           ))}

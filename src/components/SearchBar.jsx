@@ -5,10 +5,10 @@ function SearchBar({ search, setSearch }) {
   const [input, setInput] = useState("");
   return (
     <div>
-      <FaSearch />
+      <FaSearch className="search-icon" />
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
