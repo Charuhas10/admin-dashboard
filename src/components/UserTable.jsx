@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Pagination from "./Pagination";
 import { FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa";
+import "../assets/userTable.css";
 
 function UserTable({ users, setUsers, search }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -162,7 +163,7 @@ function UserTable({ users, setUsers, search }) {
                       <FaEdit />
                     </button>
                     <button onClick={() => handleDelete(user.id)}>
-                      <FaTrash />
+                      <FaTrash className="delete-icon" />
                     </button>
                   </>
                 )}

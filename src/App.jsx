@@ -2,6 +2,7 @@ import { useState } from "react";
 import UserTable from "./components/UserTable";
 import { useEffect } from "react";
 import SearchBar from "./components/SearchBar";
+import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -23,7 +24,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="app-container">
       <SearchBar search={search} setSearch={setSearch} />
       <UserTable users={users} setUsers={setUsers} search={search} />
     </div>
