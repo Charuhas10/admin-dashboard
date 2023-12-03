@@ -1,0 +1,24 @@
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .pagination-container button.first-page,
+  .pagination-container button.last-page,
+  .pagination-container button.previous-page,
+  .pagination-container button.next-page {
+    display: none;
+  }
+
+  .pagination-container {
+    flex-wrap: wrap;
+  }
+
+  .pagination-container button.page-number {
+    flex: 1 1 20%;
+    margin: 5px 0;
+  }
+}

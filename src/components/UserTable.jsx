@@ -102,7 +102,10 @@ function UserTable({ users, setUsers, search }) {
         </thead>
         <tbody>
           {currentItems.map((user) => (
-            <tr key={user.id}>
+            <tr
+              key={user.id}
+              className={checkedItems[user.id] ? "row-selected" : ""}
+            >
               <td>
                 <input
                   type="checkbox"
@@ -173,7 +176,14 @@ function UserTable({ users, setUsers, search }) {
         </tbody>
       </table>
       {isAnyCheckBoxChecked() && (
-        <button onClick={handleDeleteMultiple}>Delete Selected</button>
+        <div className="center">
+          <button
+            className="delete-selected-button"
+            onClick={handleDeleteMultiple}
+          >
+            Delete Selected
+          </button>
+        </div>
       )}
       <Pagination
         totalPage={totalPage}

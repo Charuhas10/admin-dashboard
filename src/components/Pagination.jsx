@@ -4,6 +4,7 @@ import {
   FaAngleLeft,
   FaAngleDoubleLeft,
 } from "react-icons/fa";
+import "../assets/pagination.css";
 
 function Pagination({ totalPage, currentPage, paginate }) {
   const pageNumbers = [];
@@ -11,7 +12,7 @@ function Pagination({ totalPage, currentPage, paginate }) {
     pageNumbers.push(i);
   }
   return (
-    <nav className="navigation-">
+    <nav className="pagination-container">
       <button
         className="first-page"
         onClick={() => paginate(1)}
