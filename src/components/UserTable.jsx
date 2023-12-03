@@ -23,7 +23,7 @@ function UserTable({ users, setUsers, search }) {
   //calculating the indexes
   const lastItemIndex = currentPage * itemsPerPage;
   const firstItemIndex = lastItemIndex - itemsPerPage;
-  const totalPage = Math.ceil(users.length / itemsPerPage);
+  const totalPage = Math.ceil(filteredUsers.length / itemsPerPage);
   const currentItems = filteredUsers.slice(firstItemIndex, lastItemIndex);
 
   const paginate = (pageNumber) => {
@@ -118,6 +118,7 @@ function UserTable({ users, setUsers, search }) {
                 {editingId === user.id ? (
                   <input
                     type="text"
+                    className="edit-input"
                     name="name"
                     value={editFormData.name}
                     onChange={handleFormChange}
@@ -130,6 +131,7 @@ function UserTable({ users, setUsers, search }) {
                 {editingId === user.id ? (
                   <input
                     type="text"
+                    className="edit-input"
                     name="email"
                     value={editFormData.email}
                     onChange={handleFormChange}
@@ -142,6 +144,7 @@ function UserTable({ users, setUsers, search }) {
                 {editingId === user.id ? (
                   <input
                     type="text"
+                    className="edit-input"
                     name="role"
                     value={editFormData.role}
                     onChange={handleFormChange}
@@ -185,11 +188,13 @@ function UserTable({ users, setUsers, search }) {
           </button>
         </div>
       )}
-      <Pagination
-        totalPage={totalPage}
-        currentPage={currentPage}
-        paginate={paginate}
-      />
+      {totalPage > 1 && (
+        <Pagination
+          totalPage={totalPage}
+          currentPage={currentPage}
+          paginate={paginate}
+        />
+      )}
     </div>
   );
 }

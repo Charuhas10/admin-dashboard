@@ -5,6 +5,10 @@
   margin-top: 15px;
 }
 
+.active {
+  background-color: #dadada;
+}
+
 @media screen and (max-width: 768px) {
   .pagination-container button.first-page,
   .pagination-container button.last-page,

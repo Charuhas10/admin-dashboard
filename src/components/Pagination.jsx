@@ -29,16 +29,17 @@ function Pagination({ totalPage, currentPage, paginate }) {
         <FaAngleLeft />
       </button>
 
-      {pageNumbers.map((number) => (
-        <button
-          key={number}
-          className="page-number"
-          onClick={() => paginate(number)}
-          className={currentPage === number ? "active" : ""}
-        >
-          {number}
-        </button>
-      ))}
+      {pageNumbers.map((number) =>
+        number <= totalPage ? ( // Only render page number if it is within totalPage
+          <button
+            key={number}
+            className={currentPage === number ? "active" : ""}
+            onClick={() => paginate(number)}
+          >
+            {number}
+          </button>
+        ) : null
+      )}
 
       <button
         className="next-page"

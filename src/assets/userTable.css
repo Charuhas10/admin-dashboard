@@ -6,9 +6,9 @@ table {
 
 th,
 td {
-  padding: 12px;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
-  text-align: left;
+  text-align: center;
 }
 
 tr:hover {
@@ -34,6 +34,14 @@ button {
   background-color: #e7e7e7;
 }
 
+.edit-input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -43,5 +51,4 @@ button {
   margin-top: 25px;
   cursor: pointer;
   color: red;
-  /* put it in center of the screen */
 }
