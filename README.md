@@ -15,4 +15,5 @@ This is a simple admin dashboard built with **ReactJS** for internship assignmen
 - Edit and Delete action buttons are also present and can be used to edit or delete a particular row.
 - Edit button will allow you to edit the data in the **_row itself_** and will render a Save or Discard action button.
 
-![image](https://github.com/Charuhas10/admin-dashboard/assets/72398218/8480d6da-a5ac-409b-b4c1-f327014119ee)
+![image](https://github.com/Charuhas10/admin-dashboard/assets/72398218/177e5509-abe8-4230-9cec-891a52e1a04d)
+
