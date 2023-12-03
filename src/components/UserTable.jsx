@@ -156,19 +156,25 @@ function UserTable({ users, setUsers, search }) {
               <td>
                 {editingId === user.id ? (
                   <>
-                    <button onClick={() => handleSave(user.id)}>
+                    <button
+                      className="save"
+                      onClick={() => handleSave(user.id)}
+                    >
                       <FaSave />
                     </button>
-                    <button onClick={handleCancel}>
+                    <button className="cancel" onClick={handleCancel}>
                       <FaTimes />
                     </button>
                   </>
                 ) : (
                   <>
-                    <button onClick={() => handleEdit(user)}>
+                    <button className="edit" onClick={() => handleEdit(user)}>
                       <FaEdit />
                     </button>
-                    <button onClick={() => handleDelete(user.id)}>
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(user.id)}
+                    >
                       <FaTrash className="delete-icon" />
                     </button>
                   </>

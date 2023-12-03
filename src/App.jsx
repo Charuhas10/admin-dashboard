@@ -23,9 +23,29 @@ function App() {
     fetchUsers();
   }, []);
 
+  const deleteBulk = () => {
+    // Only keep users that do not match the search term
+    if (search) {
+      setUsers(
+        users.filter(
+          (user) =>
+            !Object.values(user).some((value) =>
+              value.toString().toLowerCase().includes(search.toLowerCase())
+            )
+        )
+      );
+    } else {
+      setUsers([]); // If no search term, delete all
+    }
+  };
+
   return (
     <div className="app-container">
-      <SearchBar search={search} setSearch={setSearch} />
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+        deleteBulk={deleteBulk}
+      />
       <UserTable users={users} setUsers={setUsers} search={search} />
     </div>
   );

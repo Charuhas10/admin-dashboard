@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaSearch, FaTrash } from "react-icons/fa";
 import "../assets/searchBar.css";
 
-function SearchBar({ search, setSearch }) {
+function SearchBar({ search, setSearch, deleteBulk }) {
   const [input, setInput] = useState("");
   return (
     <div className="search-bar-container">
@@ -16,7 +16,7 @@ function SearchBar({ search, setSearch }) {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <button className="bulk-delete-button">
+      <button className="bulk-delete-button" onClick={deleteBulk}>
         <FaTrash />
       </button>
     </div>
